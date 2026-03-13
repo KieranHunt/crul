@@ -1,0 +1,14 @@
+{
+  "name": "sweet-netscape-cookie",
+  "version": "0.1.0",
+  "description": "Extract browser cookies and write them as a Netscape-format cookie jar file for curl/wget",
+  "type": "module",
+  "bin": {
+    "sweet-netscape-cookie": "src/cli.ts"
+  },
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "bun run src/cli.ts"
+  },
+  "license": "MIT"
+}
