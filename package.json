@@ -1,21 +1,58 @@
 {
-  "name": "sweet-netscape-cookie",
-  "version": "0.1.0",
+  "name": "@kieranhunt/crul",
+  "version": "0.1.1",
   "description": "Extract browser cookies and write them as a Netscape-format cookie jar file for curl/wget",
   "type": "module",
   "bin": {
-    "sweet-netscape-cookie": "src/cli.ts"
+    "crul": "dist/cli.js"
   },
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
-    "start": "bun run src/cli.ts"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
+  "keywords": [
+    "cookies",
+    "curl",
+    "wget",
+    "netscape",
+    "cookie-jar",
+    "browser",
+    "chrome",
+    "firefox",
+    "safari",
+    "edge",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KieranHunt/crul.git"
+  },
+  "author": "Kieran Hunt",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@steipete/sweet-cookie": "^0.2.0",
     "commander": "^14.0.3"
   },
   "devDependencies": {
-    "bun-types": "^1.3.10"
+    "@types/node": "^25.5.0",
+    "typescript": "^5.9.3"
   }
 }
