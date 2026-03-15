@@ -103,7 +103,7 @@ const CLI_PATH = resolve(import.meta.dirname!, "..", "dist", "cli.js");
  * Spawn the compiled CLI as a subprocess and collect its output.
  */
 export async function runCrul(args: string[]): Promise<RunResult> {
-  const proc = Bun.spawn(["node", CLI_PATH, ...args], {
+  const proc = Bun.spawn(["bun", CLI_PATH, ...args], {
     stdout: "pipe",
     stderr: "pipe",
     env: {
