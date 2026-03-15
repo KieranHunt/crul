@@ -1,5 +1,10 @@
 # crul
 
+[![npm version](https://img.shields.io/npm/v/@kieranhunt/crul)](https://www.npmjs.com/package/@kieranhunt/crul)
+[![CI](https://github.com/KieranHunt/crul/actions/workflows/ci.yml/badge.svg)](https://github.com/KieranHunt/crul/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js >= 18](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org/)
+
 Extract browser cookies and write them as a Netscape-format cookie jar file, compatible with `curl -b`, `wget --load-cookies`, and other tools that speak the Netscape cookie file format.
 
 Uses [@steipete/sweet-cookie](https://github.com/steipete/sweet-cookie) under the hood to read cookies from Chrome, Edge, Firefox, and Safari.
