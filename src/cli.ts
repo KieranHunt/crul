@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 
 import { program } from "commander";
 import { getCookies } from "@steipete/sweet-cookie";
@@ -8,11 +8,11 @@ import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 program
-  .name("sweet-netscape-cookie")
+  .name("crul")
   .description(
     "Extract browser cookies and write a Netscape-format cookie jar file for curl/wget.",
   )
-  .version("0.1.0")
+  .version("0.1.1")
   .requiredOption("--url <url>", "URL to extract cookies for (required)")
   .option(
     "--origins <urls...>",
