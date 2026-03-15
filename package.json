@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "test": "bun test",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
