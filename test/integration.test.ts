@@ -5,8 +5,8 @@ import {
   afterEach,
   afterAll,
   beforeAll,
-  setSystemTime,
-} from "bun:test";
+  vi,
+} from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
@@ -20,7 +20,7 @@ import {
 // ---------------------------------------------------------------------------
 // Freeze time so all expiry constants are deterministic.
 //
-// NOTE: setSystemTime only affects Date.now / new Date() in this Bun process.
+// NOTE: vi.setSystemTime only affects Date.now / new Date() in this Vitest process.
 // The CLI runs in a child Node process with real time, so expiry offsets must
 // be large enough that the child's "is expired?" check agrees with ours.
 // ---------------------------------------------------------------------------
@@ -28,11 +28,11 @@ const NOW = new Date("2025-06-01T00:00:00Z");
 const NOW_SECONDS = Math.floor(NOW.getTime() / 1000);
 
 beforeAll(() => {
-  setSystemTime(NOW);
+  vi.setSystemTime(NOW);
 });
 
 afterAll(() => {
-  setSystemTime(); // restore real time
+  vi.setSystemTime(vi.getRealSystemTime()); // restore real time
 });
 
 // 10 years ahead / 10 years behind — unambiguously future/past for both

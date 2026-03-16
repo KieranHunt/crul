@@ -1,7 +1,9 @@
-import { Database } from "bun:sqlite";
+import Database from "better-sqlite3";
+import { execFile } from "node:child_process";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join, resolve } from "node:path";
+import { join, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -50,7 +52,7 @@ export function createFirefoxCookieDb(cookies: TestCookie[]): string {
   const dbPath = join(dir, "cookies.sqlite");
   const db = new Database(dbPath);
 
-  db.run(`
+  db.exec(`
     CREATE TABLE moz_cookies (
       id          INTEGER PRIMARY KEY AUTOINCREMENT,
       name        TEXT    NOT NULL,
@@ -97,31 +99,29 @@ export function cleanupTmpDir(dir: string): void {
 // CLI runner
 // ---------------------------------------------------------------------------
 
-const CLI_PATH = resolve(import.meta.dirname!, "..", "dist", "cli.js");
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const CLI_PATH = resolve(__dirname, "..", "dist", "cli.js");
 
 /**
  * Spawn the compiled CLI as a subprocess and collect its output.
  */
 export async function runCrul(args: string[]): Promise<RunResult> {
-  const proc = Bun.spawn(["bun", CLI_PATH, ...args], {
-    stdout: "pipe",
-    stderr: "pipe",
-    env: {
-      ...process.env,
-      // Prevent sweet-cookie from picking up real browser cookies
-      HOME: "/nonexistent",
-      APPDATA: "/nonexistent",
-    },
+  return new Promise((resolve) => {
+    execFile("node", [CLI_PATH, ...args], {
+      env: {
+        ...process.env,
+        // Prevent sweet-cookie from picking up real browser cookies
+        HOME: "/nonexistent",
+        APPDATA: "/nonexistent",
+      },
+    }, (error, stdout, stderr) => {
+      resolve({
+        stdout: stdout ?? "",
+        stderr: stderr ?? "",
+        exitCode: error?.code != null ? (typeof error.code === "number" ? error.code : 1) : 0,
+      });
+    });
   });
-
-  const [stdout, stderr] = await Promise.all([
-    new Response(proc.stdout).text(),
-    new Response(proc.stderr).text(),
-  ]);
-
-  const exitCode = await proc.exited;
-
-  return { stdout, stderr, exitCode };
 }
 
 // ---------------------------------------------------------------------------
