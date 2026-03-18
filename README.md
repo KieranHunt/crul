@@ -45,6 +45,56 @@ npx @kieranhunt/crul --url https://app.example.com \
 curl -b <(npx @kieranhunt/crul --url https://example.com) https://example.com/api
 ```
 
+## Real-world Examples
+
+Fetch your list of GitHub repos:
+
+```bash
+curl -s -b <(npx @kieranhunt/crul --browsers firefox --url https://github.com) https://github.com/repos \
+  | htmlq 'script[data-target="react-app.embeddedData"]' -t \
+  | jq -r '.payload.reposFinderPageRoute.repositories[].name'
+  
+# kieran.casa
+# cdk-search
+# aws-sdk-waiters
+# ddb-ttl
+# ...
+```
+
+Fetch the titles of all Reddit posts you've commented on:
+
+```bash
+curl -s \
+  -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:148.0) Gecko/20100101 Firefox/148.0" \
+  -b <(npx @kieranhunt/crul --browsers firefox --url https://www.reddit.com) \
+  https://www.reddit.com/user/kieran_hunt/comments/ \
+  | htmlq 'a[aria-label]' -a aria-label \
+  | grep 'comment on' \
+  | sed 's/.*comment on //'
+
+# Do you know where this is?
+# BoxMac Q&A Live Stream - 2-28-16
+# Web developers of South Africa, what hosting site would you recommend?
+# BoxMac Episode 28: Texas Box 1 - H.E.B. Macs
+# ...
+```
+
+Fetch the title of all Hacker News posts you've upvoted:
+
+```bash
+curl \
+  -b <(npx @kieranhunt/crul --browsers firefox --url "https://news.ycombinator.com") \
+  --silent \
+  "https://news.ycombinator.com/upvoted?id=kieranhunt" \
+  | htmlq '.titleline > a' --text
+  
+# Show HN: C++ AWS MSK IAM Auth Implementation – Goodbye Kafka Passwords
+# Two Starkly Similar Novels and the Puzzle of Plagiarism
+# Browning Fever: A story of fandom, literary societies, and impenetrable verse
+# Alphabet’s Sidewalk Labs seeks share of property taxes for Toronto smart city
+# ...
+```
+
 ## Options
 
 All option names mirror the [`GetCookiesOptions`](https://github.com/steipete/sweet-cookie) API from sweet-cookie.
