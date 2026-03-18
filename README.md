@@ -50,7 +50,8 @@ curl -b <(npx --yes @kieranhunt/crul --url https://example.com) https://example.
 Fetch your list of GitHub repos:
 
 ```bash
-curl -s -b <(npx --yes @kieranhunt/crul --browsers firefox --url https://github.com) https://github.com/repos \
+curl -s -b <(npx --yes @kieranhunt/crul --browsers firefox --url https://github.com) \
+  https://github.com/repos \
   | htmlq 'script[data-target="react-app.embeddedData"]' -t \
   | jq -r '.payload.reposFinderPageRoute.repositories[].name'
   
