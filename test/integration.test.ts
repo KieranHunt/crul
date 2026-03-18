@@ -1,14 +1,8 @@
-import {
-  describe,
-  test,
-  expect,
-  afterEach,
-  afterAll,
-  beforeAll,
-  vi,
-} from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+
+import { describe, test, expect, afterEach, afterAll, beforeAll, vi } from "vitest";
+
 import {
   createFirefoxCookieDb,
   cleanupTmpDir,
@@ -64,15 +58,7 @@ function firefoxArgs(
   url = "https://example.com",
   extra: string[] = [],
 ): string[] {
-  return [
-    "--url",
-    url,
-    "--browsers",
-    "firefox",
-    "--firefox-profile",
-    profileDir,
-    ...extra,
-  ];
+  return ["--url", url, "--browsers", "firefox", "--firefox-profile", profileDir, ...extra];
 }
 
 // -------------------------------------------------------------------------
@@ -299,9 +285,7 @@ describe("crul integration tests", () => {
       },
     ]);
 
-    const result = await runCrul(
-      firefoxArgs(dir, "https://example.com", ["--names", "keep"]),
-    );
+    const result = await runCrul(firefoxArgs(dir, "https://example.com", ["--names", "keep"]));
 
     expect(result.exitCode).toBe(0);
     expect(parseNetscapeCookieJar(result.stdout)).toMatchInlineSnapshot(`
@@ -369,9 +353,7 @@ describe("crul integration tests", () => {
       },
     ]);
 
-    const result = await runCrul(
-      firefoxArgs(dir, "https://example.com", ["--include-expired"]),
-    );
+    const result = await runCrul(firefoxArgs(dir, "https://example.com", ["--include-expired"]));
 
     expect(result.exitCode).toBe(0);
     expect(parseNetscapeCookieJar(result.stdout)).toMatchInlineSnapshot(`
@@ -409,9 +391,7 @@ describe("crul integration tests", () => {
     ]);
 
     const outPath = join(dir, "cookies.txt");
-    const result = await runCrul(
-      firefoxArgs(dir, "https://example.com", ["--output", outPath]),
-    );
+    const result = await runCrul(firefoxArgs(dir, "https://example.com", ["--output", outPath]));
 
     expect(result.exitCode).toBe(0);
     expect(result.stdout).toBe("");
@@ -495,9 +475,7 @@ describe("crul integration tests", () => {
       },
     ]);
 
-    const result = await runCrul(
-      firefoxArgs(dir, "https://example.com", ["--include-expired"]),
-    );
+    const result = await runCrul(firefoxArgs(dir, "https://example.com", ["--include-expired"]));
 
     expect(result.exitCode).toBe(0);
     expect(parseNetscapeCookieJar(result.stdout)).toMatchInlineSnapshot(`

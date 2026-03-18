@@ -54,7 +54,7 @@ curl -s -b <(npx --yes @kieranhunt/crul --browsers firefox --url https://github.
   https://github.com/repos \
   | htmlq 'script[data-target="react-app.embeddedData"]' -t \
   | jq -r '.payload.reposFinderPageRoute.repositories[].name'
-  
+
 # kieran.casa
 # cdk-search
 # aws-sdk-waiters
@@ -88,7 +88,7 @@ curl \
   --silent \
   "https://news.ycombinator.com/upvoted?id=kieranhunt" \
   | htmlq '.titleline > a' --text
-  
+
 # Show HN: C++ AWS MSK IAM Auth Implementation – Goodbye Kafka Passwords
 # Two Starkly Similar Novels and the Puzzle of Plagiarism
 # Browning Fever: A story of fandom, literary societies, and impenetrable verse
@@ -100,26 +100,26 @@ curl \
 
 All option names mirror the [`GetCookiesOptions`](https://github.com/steipete/sweet-cookie) API from sweet-cookie.
 
-| Option | Description |
-|---|---|
-| `--url <url>` | **(required)** URL to extract cookies for |
-| `--output <path>` | Output file path. Omit to write to stdout |
-| `--browsers <browsers...>` | Browser backends: `chrome`, `edge`, `firefox`, `safari` |
-| `--names <names...>` | Filter to specific cookie names |
-| `--origins <urls...>` | Additional origins to include |
-| `--profile <profile>` | Alias for `--chrome-profile` |
-| `--chrome-profile <profile>` | Chrome profile name, directory, or Cookies DB path |
-| `--edge-profile <profile>` | Edge profile name, directory, or Cookies DB path |
-| `--firefox-profile <profile>` | Firefox profile name or directory path |
-| `--safari-cookies-file <path>` | Override path to Safari `Cookies.binarycookies` |
-| `--chromium-browser <browser>` | macOS Chromium target: `chrome`, `brave`, `arc`, `chromium` |
-| `--mode <mode>` | `merge` (default) or `first` |
-| `--include-expired` | Include expired cookies |
-| `--timeout-ms <ms>` | Timeout for OS helper calls (keychain/keyring/DPAPI) |
-| `--inline-cookies-file <path>` | Read inline cookie payload from file |
-| `--inline-cookies-json <json>` | Inline cookie payload as JSON string |
-| `--inline-cookies-base64 <b64>` | Inline cookie payload as base64-encoded JSON |
-| `--debug` | Print extra warnings to stderr |
+| Option                          | Description                                                 |
+| ------------------------------- | ----------------------------------------------------------- |
+| `--url <url>`                   | **(required)** URL to extract cookies for                   |
+| `--output <path>`               | Output file path. Omit to write to stdout                   |
+| `--browsers <browsers...>`      | Browser backends: `chrome`, `edge`, `firefox`, `safari`     |
+| `--names <names...>`            | Filter to specific cookie names                             |
+| `--origins <urls...>`           | Additional origins to include                               |
+| `--profile <profile>`           | Alias for `--chrome-profile`                                |
+| `--chrome-profile <profile>`    | Chrome profile name, directory, or Cookies DB path          |
+| `--edge-profile <profile>`      | Edge profile name, directory, or Cookies DB path            |
+| `--firefox-profile <profile>`   | Firefox profile name or directory path                      |
+| `--safari-cookies-file <path>`  | Override path to Safari `Cookies.binarycookies`             |
+| `--chromium-browser <browser>`  | macOS Chromium target: `chrome`, `brave`, `arc`, `chromium` |
+| `--mode <mode>`                 | `merge` (default) or `first`                                |
+| `--include-expired`             | Include expired cookies                                     |
+| `--timeout-ms <ms>`             | Timeout for OS helper calls (keychain/keyring/DPAPI)        |
+| `--inline-cookies-file <path>`  | Read inline cookie payload from file                        |
+| `--inline-cookies-json <json>`  | Inline cookie payload as JSON string                        |
+| `--inline-cookies-base64 <b64>` | Inline cookie payload as base64-encoded JSON                |
+| `--debug`                       | Print extra warnings to stderr                              |
 
 ## Output format
 

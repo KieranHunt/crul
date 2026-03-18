@@ -2,7 +2,25 @@
   "name": "@kieranhunt/crul",
   "version": "0.1.2",
   "description": "Extract browser cookies and write them as a Netscape-format cookie jar file for curl/wget",
-  "type": "module",
+  "keywords": [
+    "browser",
+    "chrome",
+    "cli",
+    "cookie-jar",
+    "cookies",
+    "curl",
+    "edge",
+    "firefox",
+    "netscape",
+    "safari",
+    "wget"
+  ],
+  "license": "MIT",
+  "author": "Kieran Hunt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KieranHunt/crul.git"
+  },
   "bin": {
     "crul": "dist/cli.js"
   },
@@ -10,35 +28,18 @@
     "dist",
     "README.md"
   ],
-  "scripts": {
-    "build": "tsc",
-    "test": "vitest run",
-    "prepublishOnly": "npm run build"
-  },
-  "keywords": [
-    "cookies",
-    "curl",
-    "wget",
-    "netscape",
-    "cookie-jar",
-    "browser",
-    "chrome",
-    "firefox",
-    "safari",
-    "edge",
-    "cli"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KieranHunt/crul.git"
-  },
-  "author": "Kieran Hunt",
-  "license": "MIT",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": ">=18"
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "lint": "oxlint --type-aware",
+    "lint:fix": "oxlint --type-aware --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@steipete/sweet-cookie": "^0.2.0",
@@ -48,7 +49,13 @@
     "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^25.5.0",
     "better-sqlite3": "^12.8.0",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0",
+    "oxlint-tsgolint": "^0.17.0",
     "typescript": "^5.9.3",
     "vitest": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

@@ -31,9 +31,7 @@ export function formatNetscapeCookieJar(cookies: Cookie[]): string {
 
     const domainField = cookie.httpOnly ? `#HttpOnly_${domain}` : domain;
 
-    lines.push(
-      [domainField, flag, path, secure, expires, name, value].join("\t"),
-    );
+    lines.push([domainField, flag, path, secure, expires, name, value].join("\t"));
   }
 
   // Ensure trailing newline

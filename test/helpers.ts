@@ -1,9 +1,10 @@
-import Database from "better-sqlite3";
 import { execFile } from "node:child_process";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+
+import Database from "better-sqlite3";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -107,20 +108,25 @@ const CLI_PATH = resolve(__dirname, "..", "dist", "cli.js");
  */
 export async function runCrul(args: string[]): Promise<RunResult> {
   return new Promise((resolve) => {
-    execFile("node", [CLI_PATH, ...args], {
-      env: {
-        ...process.env,
-        // Prevent sweet-cookie from picking up real browser cookies
-        HOME: "/nonexistent",
-        APPDATA: "/nonexistent",
+    execFile(
+      "node",
+      [CLI_PATH, ...args],
+      {
+        env: {
+          ...process.env,
+          // Prevent sweet-cookie from picking up real browser cookies
+          HOME: "/nonexistent",
+          APPDATA: "/nonexistent",
+        },
       },
-    }, (error, stdout, stderr) => {
-      resolve({
-        stdout: stdout ?? "",
-        stderr: stderr ?? "",
-        exitCode: error?.code != null ? (typeof error.code === "number" ? error.code : 1) : 0,
-      });
-    });
+      (error, stdout, stderr) => {
+        resolve({
+          stdout: stdout ?? "",
+          stderr: stderr ?? "",
+          exitCode: error?.code != null ? (typeof error.code === "number" ? error.code : 1) : 0,
+        });
+      },
+    );
   });
 }
 
