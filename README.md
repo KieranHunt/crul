@@ -18,31 +18,31 @@ npm install -g @kieranhunt/crul
 Or run directly without installing:
 
 ```bash
-npx @kieranhunt/crul --url https://example.com
+npx --yes @kieranhunt/crul --url https://example.com
 ```
 
 ## Usage
 
 ```bash
 # Extract all cookies for a URL, print to stdout
-npx @kieranhunt/crul --url https://example.com
+npx --yes @kieranhunt/crul --url https://example.com
 
 # Write to a file (created with 0600 permissions)
-npx @kieranhunt/crul --url https://example.com --output cookies.txt
+npx --yes @kieranhunt/crul --url https://example.com --output cookies.txt
 
 # Use a specific browser
-npx @kieranhunt/crul --url https://example.com --browsers chrome
+npx --yes @kieranhunt/crul --url https://example.com --browsers chrome
 
 # Filter to specific cookie names
-npx @kieranhunt/crul --url https://example.com --names session --names csrf
+npx --yes @kieranhunt/crul --url https://example.com --names session --names csrf
 
 # Multiple origins (useful for SSO/OAuth flows)
-npx @kieranhunt/crul --url https://app.example.com \
+npx --yes @kieranhunt/crul --url https://app.example.com \
   --origins https://login.example.com \
   --origins https://accounts.example.com
 
 # Pipe directly into curl
-curl -b <(npx @kieranhunt/crul --url https://example.com) https://example.com/api
+curl -b <(npx --yes @kieranhunt/crul --url https://example.com) https://example.com/api
 ```
 
 ## Real-world Examples
@@ -50,7 +50,7 @@ curl -b <(npx @kieranhunt/crul --url https://example.com) https://example.com/ap
 Fetch your list of GitHub repos:
 
 ```bash
-curl -s -b <(npx @kieranhunt/crul --browsers firefox --url https://github.com) https://github.com/repos \
+curl -s -b <(npx --yes @kieranhunt/crul --browsers firefox --url https://github.com) https://github.com/repos \
   | htmlq 'script[data-target="react-app.embeddedData"]' -t \
   | jq -r '.payload.reposFinderPageRoute.repositories[].name'
   
@@ -66,7 +66,7 @@ Fetch the titles of all Reddit posts you've commented on:
 ```bash
 curl -s \
   -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:148.0) Gecko/20100101 Firefox/148.0" \
-  -b <(npx @kieranhunt/crul --browsers firefox --url https://www.reddit.com) \
+  -b <(npx --yes @kieranhunt/crul --browsers firefox --url https://www.reddit.com) \
   https://www.reddit.com/user/kieran_hunt/comments/ \
   | htmlq 'a[aria-label]' -a aria-label \
   | grep 'comment on' \
@@ -83,7 +83,7 @@ Fetch the title of all Hacker News posts you've upvoted:
 
 ```bash
 curl \
-  -b <(npx @kieranhunt/crul --browsers firefox --url "https://news.ycombinator.com") \
+  -b <(npx --yes @kieranhunt/crul --browsers firefox --url "https://news.ycombinator.com") \
   --silent \
   "https://news.ycombinator.com/upvoted?id=kieranhunt" \
   | htmlq '.titleline > a' --text
