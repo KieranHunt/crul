@@ -51,7 +51,7 @@
     "better-sqlite3": "^12.8.0",
     "oxfmt": "^0.45.0",
     "oxlint": "^1.56.0",
-    "oxlint-tsgolint": "^0.20.0",
+    "oxlint-tsgolint": "^0.21.0",
     "typescript": "^6.0.2",
     "vitest": "^4.1.0"
   },
