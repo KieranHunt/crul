@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^26.0.0",
-    "better-sqlite3": "^12.8.0",
+    "better-sqlite3": "^13.0.1",
     "oxfmt": "^0.60.0",
     "oxlint": "^1.56.0",
     "oxlint-tsgolint": "^0.25.0",
