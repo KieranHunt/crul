@@ -46,7 +46,7 @@
     "commander": "^15.0.0"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.12",
+    "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^26.0.0",
     "better-sqlite3": "^13.0.1",
     "oxfmt": "^0.61.0",
