@@ -77,7 +77,6 @@ try {
   if (opts.output) {
     const outPath = resolve(opts.output);
     writeFileSync(outPath, output, { mode: 0o600 });
-    console.error(`Wrote ${cookies.length} cookie(s) to ${outPath}`);
   } else {
     process.stdout.write(output);
   }
